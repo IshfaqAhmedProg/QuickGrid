@@ -1,0 +1,38 @@
+{
+  "name": "@cubics/quick-tables",
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./src/index.tsx",
+    "./style.css": "./dist/index.css"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tailwindcss -i ./src/index.css -o ./dist/index.css && tsup src/index.tsx --format esm,cjs --dts --external react",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "dev": "tailwindcss -i ./src/index.css -o ./dist/index.css --watch && tsup src/index.tsx --format esm,cjs --watch --dts --external react",
+    "clean": "del -f '.turbo' && del -f 'node_modules' && del -f 'dist'"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@cubics/eslint-config": "*",
+    "@cubics/tailwind-config": "*",
+    "@cubics/tsconfig": "*",
+    "@types/react": "^18.2.61",
+    "autoprefixer": "^10.4.18",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3",
+    "tsup": "^8.0.2"
+  }
+}
