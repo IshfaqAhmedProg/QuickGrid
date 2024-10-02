@@ -4,7 +4,7 @@ import React, {
   ElementType,
   forwardRef,
 } from "react";
-import { useTable } from "../Table/TableProvider";
+import { useGrid } from "../Grid/GridProvider";
 
 type CardProps = {
   component?: ElementType;
@@ -15,14 +15,14 @@ type CardProps = {
 const Card = forwardRef<HTMLDivElement, CardProps>(
   function InnerCard(props, ref) {
     const { component, sx, ...rest } = props;
-    const table = useTable();
+    const grid = useGrid();
 
     const Component = component ?? "div";
 
     const defaultStyle: CSSProperties = {
       //   display: "flex",
-      width: table.theme?.cardWidth,
-      height: table.theme?.cardHeight,
+      width: grid.theme?.cardWidth,
+      height: grid.theme?.cardHeight,
       overflow: "hidden",
     };
 

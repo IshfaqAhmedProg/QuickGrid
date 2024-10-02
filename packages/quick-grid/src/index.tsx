@@ -1,6 +1,6 @@
-export { default as Table } from "./Table/Table";
-export { default as TableProvider, useTable } from "./Table/TableProvider";
-export type { CardComponentProps } from "./Utility/types";
+export { default as Grid } from "./Grid/Grid";
+export { default as GridProvider, useGrid } from "./Grid/GridProvider";
+export type { CellTypeProps } from "./Utility/types";
 export { default as Cell } from "./Utility/Cell";
 export { default as Card } from "./Utility/Card";
 export { default as Row } from "./Utility/Row";

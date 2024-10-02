@@ -1,18 +1,30 @@
 "use client";
-import { Card, Table, TableProvider } from "@cubics/quick-tables";
 
-import dummy from "../shared/constants/dummyData.json";
+import { Cell, Grid, GridProvider } from "@cubics/quick-grid";
 import CardComponent from "../components/CardComponent";
+import dummy from "../shared/constants/dummyData.json";
 
 export default function Page() {
   return (
-    <TableProvider
+    <GridProvider
       title="CSS"
       // cardHeaderSlot={<p>hello</p>}
-      cardComponent={CardComponent}
+      cardSlot={CardComponent}
       data={dummy}
+      gridHeaderMap={[
+        {
+          header: "Provider Data Display Name",
+          accessorKey: "providerData.0.displayName",
+          cellSlot: (v) => <Cell sx={{ backgroundColor: "blue" }}>{v}</Cell>,
+        },
+        {
+          header: "Last Refresh Time",
+          accessorKey: "metadata.lastRefreshTime",
+          cellSlot: (v) => <Cell>{v}</Cell>,
+        },
+      ]}
     >
-      <Table />
-    </TableProvider>
+      <Grid />
+    </GridProvider>
   );
 }

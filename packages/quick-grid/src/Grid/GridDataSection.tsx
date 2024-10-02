@@ -2,40 +2,40 @@ import Cell from "../Utility/Cell";
 import FlexContainer from "../Utility/FlexContainer";
 import Row from "../Utility/Row";
 import useScrollSync from "../Utility/useScrollSync";
-import { useTable } from "./TableProvider";
+import { useGrid } from "./GridProvider";
 
 interface Props {
   mainDivRef: ReturnType<typeof useScrollSync>["mainDivRef"];
   handleScrollX: ReturnType<typeof useScrollSync>["handleScrollX"];
 }
-export default function TableDataSection(props: Props) {
-  const table = useTable();
-  console.log("check", table.theme?.cardWidth);
+export default function GridDataSection({ mainDivRef, handleScrollX }: Props) {
+  const grid = useGrid();
+  console.log("check", grid.theme?.cardWidth);
 
   return (
     <FlexContainer
       className="dataSection"
       sx={{
         backgroundColor: "blanchedalmond",
-        flex: `1 0 calc(100% - ${table.theme?.headerRowHeight})`,
+        flex: `1 0 calc(100% - ${grid.theme?.headerRowHeight})`,
         overflow: "hidden auto",
-        gap: table.theme?.columnGap,
+        gap: grid.theme?.columnGap,
       }}
     >
-      {table.cardComponent && (
+      {grid.cardSlot && (
         <FlexContainer
-          className="tableCardSection"
+          className="gridCardSection"
           sx={{
             flexDirection: "column",
             height: "fit-content",
             overflow: "clip",
-            gap: table.theme?.rowGap,
+            gap: grid.theme?.rowGap,
             backgroundColor: "coral",
           }}
         >
-          {table.data.map((v, i) => {
-            if (table.cardComponent) {
-              const CardComponent = table.cardComponent;
+          {grid.data.map((v, i) => {
+            if (grid.cardSlot) {
+              const CardComponent = grid.cardSlot;
               return <CardComponent key={i} value={v} index={i} />;
             }
           })}
@@ -44,41 +44,44 @@ export default function TableDataSection(props: Props) {
       <FlexContainer
         sx={{
           flexDirection: "column",
-          maxWidth: table.cardComponent
-            ? `calc(100% - ${table.theme?.cardWidth})`
+          maxWidth: grid.cardSlot
+            ? `calc(100% - ${grid.theme?.cardWidth})`
             : "100%",
           flex: "1 0 auto",
           overflow: "auto hidden",
           height: "fit-content",
-          paddingRight: "2.5rem",
-          gap: table.theme?.rowGap,
+          // paddingRight: "2.5rem",
+          gap: grid.theme?.rowGap,
         }}
-        ref={props.mainDivRef}
-        onScroll={props.handleScrollX}
+        ref={mainDivRef}
+        onScroll={handleScrollX}
       >
-        {table.data.map((d, i) => (
+        {grid.gridMatrix.map((row, i) => (
           <Row
             sx={{
-              backgroundColor: table.selectedData[i]
+              backgroundColor: grid.selectedData[i]
                 ? "background.paper"
                 : undefined,
-              gap: table.theme?.columnGap,
+              gap: grid.theme?.columnGap,
             }}
             component={"label"}
-            key={i}
+            key={`row-${i}`}
             htmlFor={`checkbox-${i}`}
           >
-            {d &&
-              Object.keys(d).map((key) => (
+            {row &&
+              row.map((d, j) => (
                 <Cell
-                  key={key}
+                  key={`cell-${i}-${j}`}
+                  id={`cell-${i}-${j}`}
                   sx={{
-                    height: !!table.cardComponent
-                      ? table.theme?.cardHeight
-                      : table.theme?.rowHeight,
+                    height: !!grid.cardSlot
+                      ? grid.theme?.cardHeight
+                      : grid.theme?.rowHeight,
                   }}
                 >
-                  {JSON.stringify(d[key]).replaceAll('"', "")}
+                  {grid.gridHeaderMap
+                    ? grid.gridHeaderMap[j].cellSlot(d)
+                    : JSON.stringify(d).replaceAll('"', "")}
                 </Cell>
               ))}
           </Row>

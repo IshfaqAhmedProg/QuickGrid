@@ -4,7 +4,7 @@ import React, {
   ElementType,
   forwardRef,
 } from "react";
-import { useTable } from "../Table/TableProvider";
+import { useGrid } from "../Grid/GridProvider";
 
 type CellProps = {
   component?: ElementType;
@@ -14,9 +14,9 @@ type CellProps = {
 
 const Cell = forwardRef<HTMLDivElement, CellProps>(
   function InnerCell(props, ref) {
-    const { component, typographyProps, sx, ...rest } = props;
+    const { component, typographyProps, sx, className, ...rest } = props;
 
-    const { theme } = useTable();
+    const { theme } = useGrid();
 
     const Component = component ?? "div";
 
@@ -33,7 +33,7 @@ const Cell = forwardRef<HTMLDivElement, CellProps>(
       return (
         <Component
           ref={ref}
-          // className={`${defaultStyles} ${className}`}
+          className={`${className}`}
           style={{ ...defaultStyle, ...sx }}
           {...rest}
         >
@@ -53,8 +53,8 @@ const Cell = forwardRef<HTMLDivElement, CellProps>(
     return (
       <Component
         ref={ref}
-        // className={`${defaultStyles} ${className}`}
-        styles={{ ...defaultStyle, ...sx }}
+        className={`${className}`}
+        style={{ ...defaultStyle, ...sx }}
         {...rest}
       >
         {props.children}

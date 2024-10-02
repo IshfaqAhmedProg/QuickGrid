@@ -1,5 +1,5 @@
 import "./global.css";
-import "@cubics/quick-tables/style.css";
+import "@cubics/quick-grid/style.css";
 export default function RootLayout({
   children,
 }: {

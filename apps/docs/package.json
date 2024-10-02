@@ -1,5 +1,5 @@
 {
-  "name": "quick-tables-docs",
+  "name": "quick-grid-docs",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -7,10 +7,10 @@
     "start": "next start ",
     "dev": "next dev",
     "lint": "next lint",
-    "clean": "del -f '.turbo' && del -f 'node_modules' && del -f '.next'"
+    "clean": "del /q .turbo && del /q .next"
   },
   "dependencies": {
-    "@cubics/quick-tables": "*",
+    "@cubics/quick-grid": "*",
     "next": "^14.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

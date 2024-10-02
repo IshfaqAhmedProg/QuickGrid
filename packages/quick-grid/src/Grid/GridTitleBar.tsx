@@ -1,9 +1,9 @@
 // import { Stack, Typography } from "@mui/material";
 import FlexContainer from "../Utility/FlexContainer";
-import { useTable } from "./TableProvider";
+import { useGrid } from "./GridProvider";
 
-export default function TableTitleBar() {
-  const { title } = useTable();
+export default function GridTitleBar() {
+  const { title } = useGrid();
 
   // if (titleBarSlot) return titleBarSlot;
 
@@ -13,8 +13,8 @@ export default function TableTitleBar() {
     </div>
   );
 }
-export function TableTitleBarTabs() {
-  const table = useTable();
+export function GridTitleBarTabs() {
+  const grid = useGrid();
 
   return <div className="flex flex-row gap-1"></div>;
 }

@@ -3,6 +3,7 @@ import sharedConfig from "@cubics/tailwind-config";
 
 const config: Config = {
   content: ["./src/**/*.tsx"],
+  prefix: "qk-",
   presets: [sharedConfig],
 };
 
